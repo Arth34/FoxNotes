@@ -1,0 +1,360 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --brand-color: #ee8804;
+  --base-color: #e5e8ec;
+  --surface-color: #c9c4c4;
+  --text-color: #0c0b0b;
+  --secondary-text-color: #949cb6;
+  --base-transparent-90: rgba(218, 216, 216, 0.9);
+  --base-transparent-100: rgb(148, 143, 143);
+}
+
+.dark-theme {
+  --brand-color: #ee8804;
+  --base-color: #1e1f26;
+  --surface-color: #2c2f38;
+  --text-color: #f0f0f0;
+  --secondary-text-color: #b0b3c0;
+  --base-transparent-90: rgba(30, 31, 38, 0.9);
+  --base-transparent-100: rgba(30, 31, 38, 1);
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background: var(--base-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: #f0f0f0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+header {
+  display: grid;
+  grid-template-areas: "stack";
+  width: 100%;
+  height: 8rem;
+}
+header video {
+  grid-area: stack;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  object-fit: cover;
+  z-index: 1;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  will-change: transform;
+  pointer-events: none;
+}
+
+header .header-container {
+  height: inherit;
+  grid-area: stack;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin: 2rem;
+}
+
+.logo-container {
+  display: flex;
+}
+.logo-container .fox-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.add-note-btn {
+  background: var(--brand-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.add-note-btn:hover {
+  background: #ac6304;
+}
+
+.theme-toggle-btn {
+  background: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--surface-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  margin-left: 1rem;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--brand-color);
+  color: white;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem;
+}
+
+.note-card {
+  z-index: 10;
+  transform: translateZ(0);
+  will-change: transform;
+  background: var(--surface-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--surface-color);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  position: relative;
+  pointer-events: auto;
+}
+
+.note-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.note-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  word-wrap: break-word;
+}
+
+.note-content {
+  color: var(--secondary-text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.note-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.note-card:hover .note-actions {
+  opacity: 1;
+  visibility: visible;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  background: var(--base-transparent-90);
+  color: var(--text-color);
+  border: 1px solid var(--surface-color);
+}
+
+.edit-btn:hover {
+  background: var(--base-transparent-100);
+  transform: scale(1.05);
+}
+
+.delete-btn:hover {
+  background: #ff5252;
+  transform: scale(1.05);
+  color: white;
+}
+
+dialog {
+  margin: auto;
+  inset: 0;
+  border: none;
+  border-radius: 1rem;
+  padding: 0;
+  background: var(--surface-color);
+  color: var(--text-color);
+  max-width: 500px;
+  width: 90vw;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.452);
+}
+
+.dialog-content {
+  padding: 2rem;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--surface-color);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--surface-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  background: var(--base-color);
+  color: var(--text-color);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--brand-color);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.cancel-btn {
+  background: var(--base-color);
+  color: var(--text-color);
+}
+
+.save-btn {
+  background: var(--brand-color);
+  color: white;
+}
+
+.save-btn:hover {
+  background: #ac6304;
+}
+
+.empty-state {
+  z-index: 10;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary-text-color);
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+footer {
+  z-index: 10;
+  background-color: transparent;
+  display: grid;
+  width: 100%;
+  min-height: 50px;
+}
+
+footer .links-container {
+  color: #e5e8ec;
+  margin: 0.5rem;
+  text-align: right;
+  height: fit-content;
+}
+
+footer .links-container p a {
+  color: inherit;
+}
